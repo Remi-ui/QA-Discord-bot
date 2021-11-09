@@ -7,15 +7,11 @@ Robert van Timmeren - r.j.van.timmeren@student.rug.nl
 
 <h2>Launch the bot</h2>
 ```
-python3 bot_dbpedia.py
+
 ```
 
-```javascript
-function fancyAlert(arg) {
-  if(arg) {
-    $.facebox({div:'#foo'})
-  }
-}
+```
+python3 bot_dbpedia.py
 ```
 
 <h2>How it works</h2>
