@@ -8,7 +8,7 @@ from transformers import pipeline
 import requests
 import json
 
-TOKEN = 'ODk0ODkzNDM0MTMxODQxMDM1.YVwodQ.D9o0UU01Amj9NjfXRCE73vmtF00'
+TOKEN = '#'
 
 client = discord.Client()
 
