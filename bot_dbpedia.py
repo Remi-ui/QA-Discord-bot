@@ -4,6 +4,7 @@ import asyncio
 
 import transformers
 from transformers import pipeline
+import re
 
 import requests
 import json
@@ -27,7 +28,7 @@ class MyClient(discord.Client):
 		if message.author.id == self.user.id:
 			return
 
-		if user_message.lower() == 'hi quan':
+		if 'hi quan' in user_message.lower():
 			await message.channel.send(f'Hi {username}, what would you like to know something about?')
 			
 			try:
@@ -35,6 +36,8 @@ class MyClient(discord.Client):
 			except asyncio.TimeoutError:
 				return await message.channel.send(f'Sorry I did not get that')
 
+			head, sep, tail = topic.content.partition('** ')
+			topic.content = tail
 			dash_topic = topic.content.replace(" ", "_")
 			u = "http://dbpedia.org/data/{}.json".format(dash_topic)
 			data = requests.get(u)
@@ -47,6 +50,9 @@ class MyClient(discord.Client):
 
 			try:
 				question = await self.wait_for('message', timeout=15.0)
+				head, sep, tail = question.content.partition('** ')
+				question.content = tail
+				print(question.content)
 			except asyncio.TimeoutError:
 				return await message.channel.send(f'Sorry I did not get that')
 
