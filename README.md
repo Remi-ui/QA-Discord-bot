@@ -6,15 +6,13 @@ Remi Thüss - r.m.thuss@student.rug.nl
 Robert van Timmeren - r.j.van.timmeren@student.rug.nl
 
 <h2>Launch the bot</h2>
-```
-aa
-```
 
 ```
 python3 bot_dbpedia.py
 ```
 
 <h2>How it works</h2>
+
 Commands:
 <ul>
   <li><b>Hi QuAn</b> (to activate the bot)</li>
