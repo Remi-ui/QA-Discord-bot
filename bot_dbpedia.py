@@ -8,7 +8,7 @@ from transformers import pipeline
 import requests
 import json
 
-TOKEN = '#####'
+TOKEN = 'ODk0ODkzNDM0MTMxODQxMDM1.YVwodQ.D9o0UU01Amj9NjfXRCE73vmtF00'
 
 client = discord.Client()
 
@@ -57,6 +57,14 @@ class MyClient(discord.Client):
 					context = [abstract['value'] for abstract in json_data["http://dbpedia.org/resource/{}".format(dash_topic)]["http://dbpedia.org/ontology/abstract"] if abstract['lang'] == 'en'][0]
 
 			await message.channel.send(nlp(question=question.content.lower(), context=context)['answer'])
+
+			try:
+				source_msg = await self.wait_for('message', timeout=10.0)
+				if source_msg.content.lower() == '!source':
+					return await message.channel.send(f'I got this information from: http://dbpedia.org/resource/{dash_topic}')
+			except asyncio.TimeoutError:
+				return
+
 			return
 
 client = MyClient()
