@@ -12,7 +12,7 @@ python3 bot_dbpedia.py
 <h2>How it works</h2>
 Commands:
 <ul>
-  <li>Hi QuAn (to activate the bot)</li>
-  <li>!source (to retrieve the source of the last answered question)</li>
+  <li><b>Hi QuAn</b> (to activate the bot)</li>
+  <li><b>!source</b> (to retrieve the source of the last answered question)</li>
 </ul>
 
