@@ -9,6 +9,7 @@ Robert van Timmeren - r.j.van.timmeren@student.rug.nl
 ```
 python3 bot_dbpedia.py
 ```
+
 <h2>How it works</h2>
 Commands:
 <ul>
