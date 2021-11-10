@@ -9,7 +9,7 @@ import re
 import requests
 import json
 
-TOKEN = '#'
+TOKEN = 'ODk0ODkzNDM0MTMxODQxMDM1.YVwodQ.JwMwZxcWWUe6523Yg5ak15dCCtI'
 
 client = discord.Client()
 
