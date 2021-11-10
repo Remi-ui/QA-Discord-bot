@@ -5,11 +5,9 @@ Remi Thüss - r.m.thuss@student.rug.nl
 
 Robert van Timmeren - r.j.van.timmeren@student.rug.nl
 
-<h2>Launch the bot</h2>
+<h2>Demo</h2>
 
-```
-python3 bot_dbpedia.py
-```
+A demo of this bot can be found at: https://dbpediabot.remithuss.com/. Note that due to restrictions by discord it is unfortunately not possible to run a version of this bot for yourself.
 
 <h2>How it works</h2>
 
