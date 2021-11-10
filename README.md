@@ -17,3 +17,6 @@ Commands:
   <li><b>!source</b> (to retrieve the source of the last answered question)</li>
 </ul>
 
+<h2>Example</h2>
+
+![Image](img/example.png)
