@@ -11,7 +11,7 @@ import re
 import requests
 import json
 
-TOKEN = 'ODk0ODkzNDM0MTMxODQxMDM1.YVwodQ.JwMwZxcWWUe6523Yg5ak15dCCtI'
+TOKEN = '#'
 
 client = discord.Client()
 
@@ -38,13 +38,25 @@ class MyClient(discord.Client):
 			except asyncio.TimeoutError:
 				return await message.channel.send(f'Sorry I did not get that')
 
-			head, sep, tail = topic.content.partition('** ')
-			topic.content = tail
-			dash_topic = topic.content.replace(" ", "_")
+			if "** " in topic.content:
+				head, sep, tail = topic.content.partition('** ')
+				topic.content = tail
+			dash_topic = topic.content.title()
+			dash_topic = dash_topic.replace(" ", "_")
 			u = "http://dbpedia.org/data/{}.json".format(dash_topic)
 			data = requests.get(u)
 			json_data = json.loads(data.content)
 
+			if 'http://dbpedia.org/ontology/abstract' not in json_data["http://dbpedia.org/resource/{}".format(dash_topic)]:
+				if json_data["http://dbpedia.org/resource/{}".format(dash_topic)]['http://dbpedia.org/ontology/wikiPageRedirects']:
+					link = 	[link['value'] for link in json_data["http://dbpedia.org/resource/{}".format(dash_topic)]['http://dbpedia.org/ontology/wikiPageRedirects']]
+					dash_topic = link[0]
+					dash_topic = dash_topic.split('dbpedia.org/resource/', 1)[1]
+					u = "http://dbpedia.org/data/{}.json".format(dash_topic)
+					data = requests.get(u)
+					json_data = json.loads(data.content)
+
+			print(u)
 			if not json_data:
 				return await message.channel.send(f'I am sorry, I do not know much about {topic.content}')
 
@@ -52,9 +64,9 @@ class MyClient(discord.Client):
 
 			try:
 				question = await self.wait_for('message', timeout=15.0)
-				head, sep, tail = question.content.partition('** ')
-				question.content = tail
-				print(question.content)
+				if "** " in question.content:
+					head, sep, tail = question.content.partition('** ')
+					question.content = tail
 			except asyncio.TimeoutError:
 				return await message.channel.send(f'Sorry I did not get that')
 
