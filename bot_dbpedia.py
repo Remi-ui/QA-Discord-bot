@@ -11,7 +11,7 @@ import re
 import requests
 import json
 
-TOKEN = '#'
+TOKEN = 'ODk0ODkzNDM0MTMxODQxMDM1.YVwodQ.rXZ_f2-u8MXAzh-Bf74QIhMrTic'
 
 client = discord.Client()
 
