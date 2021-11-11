@@ -20,3 +20,7 @@ Commands:
 <h2>Example</h2>
 
 ![Image](img/example.png)
+
+<h2>Performance</h2>
+As this bot requires a topic to work from, tradditional benchmarks such as SQuAD are difficult to compare with. To offer some form of comparrison however, 100 questions from the SQuAD dataset were given to the bot with a topic taken from the sentence or a previous question. The results can be found here:
+https://docs.google.com/spreadsheets/d/1oUXumb7QTOv7W9T4CaBdWUzwMFyZQ3uGL4-BJrlpKpU/edit#gid=0
