@@ -11,7 +11,7 @@ import re
 import requests
 import json
 
-TOKEN = 'ODk0ODkzNDM0MTMxODQxMDM1.YVwodQ.rXZ_f2-u8MXAzh-Bf74QIhMrTic'
+TOKEN = 'OTA4MDIyNzE0OTg2NTMyOTY0.YYvsDQ.iAxlO1PsFkQfRRr1HO8oqSs9Ysk'
 
 client = discord.Client()
 
@@ -48,15 +48,26 @@ class MyClient(discord.Client):
 			json_data = json.loads(data.content)
 
 			if 'http://dbpedia.org/ontology/abstract' not in json_data["http://dbpedia.org/resource/{}".format(dash_topic)]:
-				if json_data["http://dbpedia.org/resource/{}".format(dash_topic)]['http://dbpedia.org/ontology/wikiPageRedirects']:
-					link = 	[link['value'] for link in json_data["http://dbpedia.org/resource/{}".format(dash_topic)]['http://dbpedia.org/ontology/wikiPageRedirects']]
-					dash_topic = link[0]
-					dash_topic = dash_topic.split('dbpedia.org/resource/', 1)[1]
+				try:
+					if json_data["http://dbpedia.org/resource/{}".format(dash_topic)]['http://dbpedia.org/ontology/wikiPageRedirects']:
+						link = 	[link['value'] for link in json_data["http://dbpedia.org/resource/{}".format(dash_topic)]['http://dbpedia.org/ontology/wikiPageRedirects']]
+						print(link)
+						dash_topic = link[0]
+						dash_topic = dash_topic.split('dbpedia.org/resource/', 1)[1]
+						u = "http://dbpedia.org/data/{}.json".format(dash_topic)
+						data = requests.get(u)
+						json_data = json.loads(data.content)
+				except Exception as error:
+					lookup_url = "https://lookup.dbpedia.org/api/search?maxResults=10&format=JSON&query={}".format(topic.content)
+					lookup_page = requests.get(lookup_url, verify=False)
+					lookup_data = json.loads(lookup_page.content)
+					lookup_data = lookup_data['docs']
+					lookup_data = lookup_data[0]['resource'][0]
+					dash_topic = lookup_data.split('dbpedia.org/resource/', 1)[1]
 					u = "http://dbpedia.org/data/{}.json".format(dash_topic)
 					data = requests.get(u)
 					json_data = json.loads(data.content)
 
-			print(u)
 			if not json_data:
 				return await message.channel.send(f'I am sorry, I do not know much about {topic.content}')
 
