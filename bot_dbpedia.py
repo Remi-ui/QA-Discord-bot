@@ -11,7 +11,7 @@ import re
 import requests
 import json
 
-TOKEN = 'OTA4MDIyNzE0OTg2NTMyOTY0.YYvsDQ.-v1Sg_-y7hFmFS_qu2X7YzTIKD4'
+TOKEN = 'ODk0ODkzNDM0MTMxODQxMDM1.YVwodQ.TrKkyQc-4-482vkiHocSoA87ICc'
 
 client = discord.Client()
 
@@ -48,6 +48,7 @@ class MyClient(discord.Client):
 			json_data = json.loads(data.content)
 
 			try:
+				link = 	[link['value'] for link in json_data["http://dbpedia.org/resource/{}".format(dash_topic)]['http://dbpedia.org/ontology/wikiPageRedirects']]
 				if 'http://dbpedia.org/ontology/abstract' not in json_data["http://dbpedia.org/resource/{}".format(dash_topic)]:
 					try:
 						if json_data["http://dbpedia.org/resource/{}".format(dash_topic)]['http://dbpedia.org/ontology/wikiPageRedirects']:
@@ -73,15 +74,15 @@ class MyClient(discord.Client):
 				lookup_page = requests.get(lookup_url, verify=False)
 				lookup_data = json.loads(lookup_page.content)
 				lookup_data = lookup_data['docs']
-				print(lookup_data)
-				lookup_data = lookup_data[0]['resource'][0]
-				print(lookup_data)
-				dash_topic = lookup_data.split('dbpedia.org/resource/', 1)[1]
-				u = "http://dbpedia.org/data/{}.json".format(dash_topic)
-				data = requests.get(u)
-				json_data = json.loads(data.content)
+				if len(lookup_data) != 0:
+					lookup_data = lookup_data[0]['resource'][0]	
+					dash_topic = lookup_data.split('dbpedia.org/resource/', 1)[1]
+					u = "http://dbpedia.org/data/{}.json".format(dash_topic)
+					data = requests.get(u)
+					json_data = json.loads(data.content)
 
 			if not json_data:
+				dash_topic == ""
 				return await message.channel.send(f'I am sorry, I do not know much about {topic.content}')
 
 			await message.channel.send(f'What would you like to know about {topic.content}?')
