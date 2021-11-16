@@ -7,7 +7,7 @@ Robert van Timmeren - r.j.van.timmeren@student.rug.nl
 
 <h2>Demo</h2>
 
-A demo of this bot can be found at: https://dbpediabot.remithuss.com/. Note that due to restrictions by discord it is unfortunately not possible to run a version of this bot for yourself.
+<b>On request</b> a bot can be made available on: https://dbpediabot.remithuss.com/. Please use one of the provided emailadresses to request the bot to be made available. Note that due to restrictions by discord it is unfortunately not possible to run a version of this bot for yourself.
 
 <h2>How it works</h2>
 
